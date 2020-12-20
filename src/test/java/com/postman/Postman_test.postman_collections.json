@@ -1,0 +1,318 @@
+{
+  "info": {
+    "_postman_id": "1cc2fbf8-087d-42db-ace0-c0a0b35a9871",
+    "name": "jsonplaceholder",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET a list of posts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "0fef89e1-1a0f-42eb-af2e-3dffaee3d2d3",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(200);",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})",
+              "",
+              "pm.test('asseert array element length ', () => {",
+              "    pm.expect(pm.response.json().length).to.eql(100);",
+              "})",
+              "",
+              "const jsonData = pm.response.json();",
+              "pm.test('asseert first element in array ', () => {",
+              "   pm.expect(jsonData[0].userId).to.eql(1); ",
+              "   pm.expect(jsonData[0].id).to.eql(1); ",
+              "   pm.expect(jsonData[0].title).to.eql(\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\"); ",
+              "   pm.expect(jsonData[0].body).to.eql(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"); ",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts",
+          "host": [
+            "{{host}}posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET post by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "fa55b3da-68ad-4244-9752-b800d5dca257",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(200);",
+              "     pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})",
+              "",
+              "const jsonData = pm.response.json();",
+              "pm.test('asseert returned data by userId, id, title and body', () => {",
+              "    pm.expect(jsonData.userId).to.eql(1); ",
+              "    pm.expect(jsonData.id).to.eql(1); ",
+              "    pm.expect(jsonData.title).to.eql(\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\"); ",
+              "    pm.expect(jsonData.body).to.eql(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"); ",
+              "})",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts/1",
+          "host": [
+            "{{host}}posts"
+          ],
+          "path": [
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST create a post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "ad3ca00e-6bb0-436f-835f-d0ebbeb5cc2e",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(201);",
+              "     pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})",
+              "",
+              "const jsonData = pm.response.json();",
+              "pm.test('asseert returned id for created post', () => {",
+              "    pm.expect(jsonData.id).to.eql(101); ",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts?title=post title&body=post body text&userId=77",
+          "host": [
+            "{{host}}posts"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "post title"
+            },
+            {
+              "key": "body",
+              "value": "post body text"
+            },
+            {
+              "key": "userId",
+              "value": "77"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST create a post without params",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "712de5e6-595f-4396-a89a-e964f9150508",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(201);",
+              "     pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})",
+              "",
+              "const jsonData = pm.response.json();",
+              "pm.test('asseert returned id for created post', () => {",
+              "    pm.expect(jsonData.id).to.eql(101); ",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts",
+          "host": [
+            "{{host}}posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT modify a created post by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "7237c488-1415-4a50-986a-1bbcc88f6581",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(200);",
+              "     pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})",
+              "",
+              "const jsonData = pm.response.json();",
+              "pm.test('asseert returned id for created post', () => {",
+              "    pm.expect(jsonData.id).to.eql(1); ",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts/1?title=post title&body=post body text&userId=77&id=101",
+          "host": [
+            "{{host}}posts"
+          ],
+          "path": [
+            "1"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "post title"
+            },
+            {
+              "key": "body",
+              "value": "post body text"
+            },
+            {
+              "key": "userId",
+              "value": "77"
+            },
+            {
+              "key": "id",
+              "value": "101"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH modify a created post by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "76ce509f-cc7a-41db-87bf-ae026125aa9f",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(200);",
+              "     pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})",
+              "",
+              "const jsonData = pm.response.json();",
+              "pm.test('asseert returned id for created post', () => {",
+              "     pm.expect(jsonData.userId).to.eql(1); ",
+              "    pm.expect(jsonData.id).to.eql(1); ",
+              "    pm.expect(jsonData.title).to.eql(\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\"); ",
+              "    pm.expect(jsonData.body).to.eql(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"); ",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts/1?title=post title&body=post body text&userId=1&id=1",
+          "host": [
+            "{{host}}posts"
+          ],
+          "path": [
+            "1"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "post title"
+            },
+            {
+              "key": "body",
+              "value": "post body text"
+            },
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete post by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "ec185457-2473-4ddb-a224-f299eef8b8c1",
+            "exec": [
+              "pm.test('200 reposponse status', function(){",
+              "    pm.response.to.have.status(200);",
+              "     pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{host}}posts/1",
+          "host": [
+            "{{host}}posts"
+          ],
+          "path": [
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {},
